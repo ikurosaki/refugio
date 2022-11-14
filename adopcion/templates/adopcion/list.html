@@ -1,0 +1,53 @@
+{% extends 'adopcion/base.html' %}
+
+
+{% block title %}
+    Lista
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</td>
+                    <th>Sexo</td>
+                    <th>Edad</td>
+                    <th>Fecha de Rescate</td>
+                    <th>Adoptante</td>
+                    <th>Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Para vista basada en funciones-->
+                <!--Para vista basada en Clases-->
+                {% if object_list %}
+                {% for mascota in object_list %}
+                <tr>
+                    <td>{{ mascota.id }}</td>
+                    <td>{{ mascota.nombre }}</td>
+                    <td>{{ mascota.sexo }}</td>
+                    <td>{{ mascota.edad_aproximada }}</td>
+                    <td>{{ mascota.fecha_rescate }}</td>
+                    <td>{{ mascota.persona.nombre }} {{ mascota.persona.apellido }}</td>
+                    <td>
+                        <!-- Boton de Editar -->
+                        <a class="btn btn-primary" href="{% url 'edit' mascota.id %}">Editar</a>
+                         <!-- Boton de Eliminar -->
+                         <a class="btn btn-danger" href="{% url 'delete' mascota.id %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% else %}
+                <h3>No hay registros de Mascotas</h3>
+
+                {% endif %}
+            
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}
